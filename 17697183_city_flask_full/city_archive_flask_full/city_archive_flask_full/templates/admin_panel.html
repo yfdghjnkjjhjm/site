@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="admin-container">
+    <h2>Панель администратора</h2>
+
+    <!-- Форма поиска -->
+    <form method="POST" action="/admin/search" class="search-form">
+        <input type="text" name="query" placeholder="Поиск по ФИО или email" value="{{ query or '' }}">
+        <button type="submit" class="btn-search">Поиск</button>
+        {% if query %}
+        <a href="/admin/panel" class="btn-reset">Сбросить</a>
+        {% endif %}
+    </form>
+
+    <!-- Таблица обращений -->
+    <table class="requests-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>ФИО</th>
+                <th>Email</th>
+                <th>Тип документа</th>
+                <th>Цель запроса</th>
+                <th>Комментарий</th>
+                <th>Статус</th>
+                <th>Дата подачи</th>
+                <th>Действия</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if requests %}
+                {% for r in requests %}
+                <tr>
+                    <td>{{ r.id }}</td>
+                    <td>{{ r.full_name }}</td>
+                    <td>{{ r.email }}</td>
+                    <td>{{ r.document_type }}</td>
+                    <td>{{ r.purpose }}</td>
+                    <td>{{ r.comment or '-' }}</td>
+                    <td>
+                        {% if r.status == 'новое' %}
+                            <span class="badge new">Новое</span>
+                        {% elif r.status == 'в обработке' %}
+                            <span class="badge inprogress">В обработке</span>
+                        {% else %}
+                            <span class="badge done">Выполнено</span>
+                        {% endif %}
+                    </td>
+                    <td>{{ r.date_created }}</td>
+                    <td class="actions">
+                        <a href="/update_status/{{ r.id }}/в обработке" class="btn-action yellow">В обработке</a>
+                        <a href="/update_status/{{ r.id }}/выполнено" class="btn-action green">Выполнено</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            {% else %}
+                <tr><td colspan="9" class="no-data">Нет обращений</td></tr>
+            {% endif %}
+        </tbody>
+    </table>
+
+    <div class="logout">
+        <a href="/logout" class="btn-logout">Выйти</a>
+    </div>
+</div>
+{% endblock %}

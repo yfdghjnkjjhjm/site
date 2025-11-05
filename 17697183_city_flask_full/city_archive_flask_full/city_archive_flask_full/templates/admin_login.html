@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="login-container">
+    <h2>Вход администратора</h2>
+    <p>Введите логин и пароль для входа в систему управления обращениями.</p>
+
+    <form method="POST" action="/admin" class="login-form">
+        <label for="username">Логин:</label>
+        <input type="text" id="username" name="username" placeholder="Введите логин" required>
+
+        <label for="password">Пароль:</label>
+        <input type="password" id="password" name="password" placeholder="Введите пароль" required>
+
+        <button type="submit" class="btn-login">Войти</button>
+    </form>
+
+    <div class="back-link">
+        <a href="/">← Вернуться на главную</a>
+    </div>
+</div>
+{% endblock %}

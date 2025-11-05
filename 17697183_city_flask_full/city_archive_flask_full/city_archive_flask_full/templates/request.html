@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Подать обращение — Городской архив</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<header class="header">
+    <div class="container header-container">
+        <h1 class="logo">Городской архив</h1>
+        <nav class="nav">
+            <a href="/">Главная</a>
+            <a href="/request" class="active">Подать обращение</a>
+            <a href="/admin">Администратор</a>
+        </nav>
+    </div>
+</header>
+
+<section class="form-section">
+    <div class="container">
+        <h2>Подать обращение</h2>
+        <p>Заполните форму, чтобы направить обращение в городской архив. После отправки сотрудники свяжутся с вами по указанной электронной почте.</p>
+
+        <form method="POST" action="/request">
+            <label for="full_name">ФИО заявителя:</label>
+            <input type="text" id="full_name" name="full_name" required>
+
+            <label for="email">Электронная почта:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="document_type">Тип документа:</label>
+            <select id="document_type" name="document_type" required>
+                <option value="Справка о стаже">Справка о стаже</option>
+                <option value="Архивная копия">Архивная копия</option>
+                <option value="Выписка из документа">Выписка из документа</option>
+                <option value="Другое">Другое</option>
+            </select>
+
+            <label for="purpose">Цель запроса:</label>
+            <input type="text" id="purpose" name="purpose" required>
+
+            <label for="comment">Комментарий:</label>
+            <textarea id="comment" name="comment" rows="4" placeholder="Дополнительная информация (по желанию)"></textarea>
+
+            <button type="submit" class="btn-submit">Отправить обращение</button>
+        </form>
+    </div>
+</section>
+
+<footer class="footer">
+    <div class="container">
+        <p>© Городской архив, 2025</p>
+    </div>
+</footer>
+
+</body>
+</html>
